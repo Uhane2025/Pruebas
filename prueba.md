@@ -106,6 +106,100 @@ sudo -u postgres createuser --pwprompt zabbix
 Nos pedira una contraseña para estos fines se ocupa: admin123
 se repite la contraseña por dos veces debido a la confirmacion 
 
+despues introducimos el siguiente comando:
+
+sudo -u postgres createdb -O zabbix zabbix
+
+En el servidor Zabbix, importe el esquema y los datos iniciales. Se le pedirá que ingrese la contraseña recién creada. Con el siguiente comando
+
+zcat /usr/share/zabbix/sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+
+Configurar la base de datos para el servidor Zabbix
+sudo nano /etc/zabbix/zabbix_server.conf, buscamos la siguiente linea:
+
+# DBPassword=
+
+Borramos # y despues de = ingresamos la contraseña antes creada es decir "admin123", como se muestra en la imagen de abajo
+
+<img width="1473" height="880" alt="image" src="https://github.com/user-attachments/assets/5cb74d7f-8a7a-48c6-8e18-b6c079e105c8" />
+
+Guardamos con ctl + O, damos enter y despues usamos ctl + X
+
+despues iniciamos todos los servicios con el siguiente comando:
+
+sudo systemctl restart zabbix-server zabbix-agent2 apache2
+
+si no muestra ningun error usamos el siguiente comando:
+
+sudo systemctl enable zabbix-server zabbix-agent2 apache2
+
+Despues de terminar, nos vamos a un navegador web y en la barra de busqueda ingresamos:
+
+ http://host/zabbix
+
+ en el apartado de host ingresamos la ip de la maquina donde tenemos zabbix, para saber la ip usamos el comanod
+
+ ip add
+
+ Una vez ingresado a la web con la url, se muestra una pagina como esta:
+
+ <img width="1252" height="746" alt="image" src="https://github.com/user-attachments/assets/608ab187-5a69-4357-93dc-f9151dd068a8" />
+
+Lo siguiente es la configuración web, para este paso nos aparece una advertencia en el menu de seleccion de idioma, debido a qie solo nos permite seleccionar el idioma ingles
+
+Para solucionar esto volvemos a la mv, e ingresmos el siguiente comando:
+
+sudo dpkg-reconfigure locales
+
+esto nos abrira una ventana como la siguiente:
+
+<img width="1487" height="823" alt="image" src="https://github.com/user-attachments/assets/eb958289-8dbf-4f93-a971-0381cc6ac524" />
+
+nos deslizamos po las diferentes opciones con laflecha de bajar hasta encontrar el idioma "es_ES.UTF-8", una vez encontrado, lo seleccinamos presinando la barra espaciadora
+esto nos dara un asterisco en el recuadro seleccionado como se muestra en la siguiente figura
+
+<img width="1333" height="729" alt="image" src="https://github.com/user-attachments/assets/982c00f3-d034-4cef-a3af-21de418bd73f" />
+
+despues usamos la tecla Tap, para seleccinar el apartado de aceptar y damos enter, se muestra una nueva ventana como la de a continuacion
+<img width="1496" height="699" alt="image" src="https://github.com/user-attachments/assets/276ced8f-5456-4e4e-83eb-b0703b2f521a" />
+
+A la cual damos tap de nuevo para seleccionar aceptar y dams enter, esto va a descragar los paquetes de idiomas necesarios
+
+una vez terminada la descarga debemo reiniciar los servicios web con el siguiente comando:
+
+sudo systemctl restart apache2
+
+seguido de esto, volvemos a la paina web, recargamos la pagina y al ver el menu de nuevo el apartado de idioma español ya debe de estar activo
+
+seleccionamos el idioma y damos clcik en siguiente paso
+
+lo siguiente es que aparezva una lista de servicios, todos deben de estar en "OK" y deben de estar en verde, si alguno de ellos no esta en verde, es necesario revisar cual es el problema
+
+una vez visto esto, se va a dar click en siuiente y en el apartado que sigue como se muestra en la siguiente imagen
+
+<img width="1190" height="683" alt="image" src="https://github.com/user-attachments/assets/3eb77de1-3d13-4dec-9f60-0e10201d4097" />
+
+El unico apartado a llenar es el de la contraseña de la BD, que en este caso es: admin123
+
+y damos siguiente 
+
+<img width="1185" height="694" alt="image" src="https://github.com/user-attachments/assets/8030e3e2-a2d4-4a8d-b18b-402f67f0db19" />
+
+en esta pagina, ingresamos un nombre para el sistema zabbix, despues seleccionamos la zona horaria de donde estas actualemnte, y en el apartado de color, puedes seleccionar el que sea necesario, por defecto es azul
+
+damos click en siguiente, se nos muestra un resumen de las configuraciones como se muestran en la imagen de bajo
+
+<img width="1194" height="689" alt="image" src="https://github.com/user-attachments/assets/1e5c7b50-615b-44ac-85db-e36c447908c7" />
+
+damos click en siguiente paso y despues en el boton de finalizar como se muestra en la imagen de abajo
+
+<img width="1181" height="693" alt="image" src="https://github.com/user-attachments/assets/5cb166ff-4ccb-4f52-a765-babffa216d2c" />
+
+
+
+
+
+
 
 
 
