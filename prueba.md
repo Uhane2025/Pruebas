@@ -195,6 +195,16 @@ damos click en siguiente paso y despues en el boton de finalizar como se muestra
 
 <img width="1181" height="693" alt="image" src="https://github.com/user-attachments/assets/5cb166ff-4ccb-4f52-a765-babffa216d2c" />
 
+Una vez terminada la configuración se muestra el inicio de sesion de zabbix como se muesra a continuación
+
+<img width="1056" height="747" alt="image" src="https://github.com/user-attachments/assets/ffbac28a-fe26-45ab-8e3b-3101a56dd6b1" />
+
+Para acceder a zabbix usamos el usuario: Admin y password: zabbix, damos click en acceder y despues se nos muestra el panel principal como se muestra en la imagen de abajo
+
+<img width="1803" height="837" alt="image" src="https://github.com/user-attachments/assets/77b8e56a-df93-4538-8ca7-42d4623066fb" />
+
+y con esto termina la instalación de un servidor zabbix
+
 
 
 
